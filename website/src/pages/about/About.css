@@ -1,0 +1,84 @@
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.about-images {
+  position: relative;
+  height: 520px;
+}
+.about-img1 { 
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  width: 75%; 
+  height: 380px; 
+  object-fit: cover; 
+  border-radius: 4px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.12);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.about-img2 { 
+  position: absolute; 
+  bottom: 0; 
+  right: 0; 
+  width: 58%; 
+  height: 280px; 
+  object-fit: cover; 
+  border: 10px solid white; 
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  border-radius: 4px;
+  z-index: 2;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease;
+}
+.about-img3 { 
+  position: absolute; 
+  top: 55%; 
+  left: -20px; 
+  width: 42%; 
+  height: 180px; 
+  object-fit: cover; 
+  border: 8px solid white; 
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+  border-radius: 4px;
+  z-index: 3;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-images img:hover {
+  transform: translateY(-10px) scale(1.02);
+}
+
+.about-text p { color: var(--slate); font-size: 16px; line-height: 1.8; margin-bottom: 24px; }
+
+.experience-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.about-services-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+.about-service { background: white; border: 1px solid var(--border); overflow: hidden; }
+.about-service img { width: 100%; height: 240px; object-fit: cover; }
+.about-service-body { padding: 32px; }
+.about-service-body h3 { font-family: var(--font-display); font-size: 24px; color: var(--navy); margin-bottom: 16px; }
+.about-service-body p { font-size: 14px; color: var(--slate); line-height: 1.8; }
+
+.testimonials-grid-about {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+@media (max-width: 900px) {
+  .about-grid, .experience-grid, .about-services-grid, .testimonials-grid-about {
+    grid-template-columns: 1fr;
+  }
+  .about-images { height: 300px; }
+}
