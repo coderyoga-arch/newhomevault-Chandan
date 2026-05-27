@@ -1,7 +1,9 @@
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { properties, testimonials, blogs } from "../../utils/mockData";
+import { properties as mockProperties, testimonials, blogs } from "../../utils/mockData";
+import { propertyService } from "../../services/supabaseService";
 import "./Home.css";
-import meganShowroom from "../../assets/images/megan_showroom_clean.png";
+import meganShowroom from "../../assets/images/megan_showroom.png";
 import meganMain from "../../assets/images/megan_main.png";
 
 const heroSlides = [
@@ -12,8 +14,24 @@ const heroSlides = [
 
 export default function Home() {
   const navigate = useNavigate();
+  const [properties, setProperties] = useState([]);
+  const [showDisclaimer, setShowDisclaimer] = useState(true);
+
+  useEffect(() => {
+    async function loadProperties() {
+      try {
+        const data = await propertyService.fetchProperties();
+        if (data) {
+          setProperties(data);
+        }
+      } catch (err) {
+        console.error("Home: Failed to fetch properties:", err);
+      }
+    }
+    loadProperties();
+  }, []);
+
   const featured = properties.slice(0, 3);
-  const spotlight = properties.slice(0, 2);
 
   return (
     <div className="home">
@@ -75,26 +93,28 @@ export default function Home() {
       </section>
 
       {/* PROJECT BY LOCATION */}
-      <section id="project-locations" className="section">
-        <div className="container">
-          <div style={{ marginBottom: 40 }}>
-            <span className="section-label">Area Projects</span>
-            <h2 className="section-title">Project By Location</h2>
-          </div>
-          <div className="location-grid">
-            {properties.slice(0, 3).map((p) => (
-              <div key={p.id} className="location-card" onClick={() => navigate("/property-detail", { state: p })}>
-                <img src={p.img} alt={p.name} />
-                <div className="location-overlay">
-                  <h3>{p.name}</h3>
-                  <span>{p.location}</span>
-                  <button className="btn-outline">View Property</button>
+      {properties.length > 0 && (
+        <section id="project-locations" className="section">
+          <div className="container">
+            <div style={{ marginBottom: 40 }}>
+              <span className="section-label">Area Projects</span>
+              <h2 className="section-title">Project By Location</h2>
+            </div>
+            <div className="location-grid">
+              {properties.slice(0, 3).map((p) => (
+                <div key={p.id} className="location-card" onClick={() => navigate("/property-detail", { state: p })}>
+                  <img src={p.img || "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&q=80"} alt={p.name} />
+                  <div className="location-overlay">
+                    <h3>{p.name}</h3>
+                    <span>{p.location}</span>
+                    <button className="btn-outline">View Property</button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* FEATURED LISTINGS */}
       <section id="featured-listings" className="section">
@@ -103,28 +123,38 @@ export default function Home() {
             <span className="section-label">Properties</span>
             <h2 className="section-title">Featured Listings</h2>
           </div>
-          <div className="listings-grid">
-            {featured.map((p) => (
-              <div key={p.id} className="listing-card" onClick={() => navigate("/property-detail", { state: p })}>
-                <div className="listing-img-wrap">
-                  <img src={p.img} alt={p.name} />
-                  <span className="listing-badge">{p.status}</span>
-                </div>
-                <div className="listing-body">
-                  <p className="listing-loc">📍 {p.location}</p>
-                  <div className="listing-specs">
-                    <span>🛏 {p.beds}</span>
-                    <span>🚿 {p.baths}</span>
+          {featured.length > 0 ? (
+            <div className="listings-grid">
+              {featured.map((p) => (
+                <div key={p.id} className="listing-card" onClick={() => navigate("/property-detail", { state: p })}>
+                  <div className="listing-img-wrap">
+                    <img src={p.img || "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&q=80"} alt={p.name} />
+                    <span className="listing-badge">{p.status}</span>
                   </div>
-                  <p className="listing-price">From ${p.priceFrom.toLocaleString()} – ${p.priceTo.toLocaleString()}</p>
-                  <h3 className="listing-title">{p.name}</h3>
+                  <div className="listing-body">
+                    <p className="listing-loc">📍 {p.location}</p>
+                    <div className="listing-specs">
+                      <span>🛏 {p.beds} Beds</span>
+                      <span>🚿 {p.baths} Baths</span>
+                    </div>
+                    {p.priceFrom && (
+                      <p className="listing-price">From ${p.priceFrom.toLocaleString()}</p>
+                    )}
+                    <h3 className="listing-title">{p.name}</h3>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-          <div style={{ textAlign: 'center', marginTop: 48 }}>
-            <button className="btn-outline" onClick={() => navigate("/property")}>View All Properties</button>
-          </div>
+              ))}
+            </div>
+          ) : (
+            <div style={{ textAlign: "center", padding: "60px 20px", border: "1px dashed var(--border)", background: "white", borderRadius: "4px" }}>
+              <p style={{ color: "var(--slate)", fontSize: "15px" }}>No active pre-construction listings found. Please contact our advisory team for private developments.</p>
+            </div>
+          )}
+          {featured.length > 0 && (
+            <div style={{ textAlign: 'center', marginTop: 48 }}>
+              <button className="btn-outline" onClick={() => navigate("/property")}>View All Properties</button>
+            </div>
+          )}
         </div>
       </section>
 
@@ -171,6 +201,37 @@ export default function Home() {
                 </div>
               </a>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* DISCLAIMER ACCORDION */}
+      <section className="home-disclaimer-section section-alt">
+        <div className="container">
+          <div className={`disclaimer-box ${showDisclaimer ? "active" : ""}`}>
+            <div className="disclaimer-header" onClick={() => setShowDisclaimer(!showDisclaimer)} style={{ cursor: "pointer" }}>
+              <strong>Pre-Construction Disclaimer <span className="icon">{showDisclaimer ? "−" : "+"}</span></strong>
+            </div>
+            {showDisclaimer && (
+              <div className="disclaimer-content">
+                <p>
+                  This website may receive visitors through paid advertising campaigns on platforms including Facebook, Instagram, and other Meta properties. Content presented in advertisements and on this website is intended for informational and promotional purposes only and should not be interpreted as a formal offer to sell real estate.
+                </p>
+                <p style={{ marginTop: 12 }}>
+                  Property details, pricing, incentives, floor plans, specifications, and availability are subject to change without notice. All renderings, illustrations, images, and visual representations are artist’s concepts and may not accurately reflect the final product.
+                  Some property information, project descriptions, and related materials may be provided by third-party developers, builders, marketing partners, or data providers. While reasonable efforts are made to maintain accuracy, no representation or warranty is made regarding the completeness, accuracy, or current status of the information presented. Prospective buyers should verify all details directly with the developer or authorized sales representatives.
+                </p>
+                <p style={{ marginTop: 12 }}>
+                  This website operates as an independent platform and is not affiliated with any developer, builder, project, or brand unless explicitly stated.
+                </p>
+                <p style={{ marginTop: 12 }}>
+                  Information presented on this website does not constitute legal, financial, tax, or investment advice. Users should consult qualified professionals before making any real estate or investment decisions.
+                </p>
+                <p style={{ marginTop: 12 }}>
+                  By submitting a form on this website, you consent to being contacted by phone, email, or messaging regarding your inquiry. Submission of a form does not constitute a purchase agreement, reservation, or guarantee of property availability.
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </section>

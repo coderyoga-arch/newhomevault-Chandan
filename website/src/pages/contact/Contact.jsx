@@ -68,12 +68,18 @@ export default function Contact() {
         </div>
       </section>
 
-      <section className="map-section">
-        <div className="container">
-          <div className="map-placeholder">
-            <p>Toronto Office Location</p>
-            <span>5010 Steeles Ave West, Suite 11A</span>
-          </div>
+      <section className="map-section" style={{ height: "450px", marginBottom: "60px" }}>
+        <div className="container" style={{ height: "100%" }}>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2881.08053629471!2d-79.60533282343272!3d43.75043814612349!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b3a270f2f3d53%3A0xe9fa688dbce047fa!2s5010%20Steeles%20Ave%20W%2C%20Etobicoke%2C%20ON%20M9V%205C6%2C%20Canada!5e0!3m2!1sen!2sin!4v1716800000000!5m2!1sen!2sin"
+            width="100%"
+            height="100%"
+            style={{ border: 0, borderRadius: "8px", boxShadow: "0 15px 40px rgba(0,0,0,0.08)" }}
+            allowFullScreen=""
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Office Location Map"
+          />
         </div>
       </section>
     </div>

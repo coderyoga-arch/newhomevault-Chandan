@@ -24,6 +24,7 @@ export default function Footer() {
             <li><Link to="/services#core-services">Our Services</Link></li>
             <li><Link to="/property">New Properties</Link></li>
             <li><Link to="/contact#inquiry">Get in Touch</Link></li>
+            <li><a href="http://localhost:5174" target="_blank" rel="noreferrer" style={{ opacity: 0.6 }}>Admin Portal</a></li>
           </ul>
         </div>
         <div className="footer-newsletter">
@@ -37,8 +38,8 @@ export default function Footer() {
       <div className="footer-bottom container">
         <p>© NewHomeVault.com — Megan Rekhi — Salesperson, HomeLife/Miracle Realty Ltd., Brokerage</p>
         <div className="footer-legal">
-          <button>Terms & Conditions</button>
-          <button>Privacy Policy</button>
+          <Link to="/terms-conditions">Terms & Conditions</Link>
+          <Link to="/privacy-policy">Privacy Policy</Link>
         </div>
       </div>
       <div className="footer-disclaimer container">

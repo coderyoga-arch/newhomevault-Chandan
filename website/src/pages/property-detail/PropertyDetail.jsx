@@ -1,5 +1,7 @@
+import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { properties } from "../../utils/mockData";
+import { properties as mockProperties } from "../../utils/mockData";
+import { propertyService } from "../../services/supabaseService";
 import LeadForm from "../../components/common/LeadForm";
 import meganMain from "../../assets/images/megan_main.png";
 import "./PropertyDetail.css";
@@ -7,8 +9,26 @@ import "./PropertyDetail.css";
 export default function PropertyDetail() {
   const location = useLocation();
   const navigate = useNavigate();
-  const p = location.state || properties[0];
+  const [properties, setProperties] = useState([]);
+  
+  useEffect(() => {
+    async function loadProperties() {
+      try {
+        const data = await propertyService.fetchProperties();
+        if (data && data.length > 0) {
+          setProperties(data);
+        } else {
+          setProperties(mockProperties);
+        }
+      } catch (err) {
+        console.error("PropertyDetail: Failed to load properties from database:", err);
+        setProperties(mockProperties);
+      }
+    }
+    loadProperties();
+  }, []);
 
+  const p = location.state || properties[0] || mockProperties[0];
   const related = properties.filter((x) => x.id !== p.id).slice(0, 3);
 
   return (
@@ -68,28 +88,17 @@ export default function PropertyDetail() {
 
             <div className="pd-section">
               <h2>About {p.name}</h2>
-              <p>{p.desc}</p>
-              <p style={{ marginTop: 16 }}>
-                This is a pre-construction opportunity. Contact our advisory team for current pricing, floor plan options,
-                deposit structures, and builder incentives. We'll walk you through every step with clarity and no pressure.
-              </p>
+              <p style={{ whiteSpace: "pre-line", lineHeight: "1.8", color: "var(--slate)" }}>{p.desc}</p>
             </div>
 
             <div className="pd-section">
-              <h2>Location & Community</h2>
-              <p>
-                Located in <strong>{p.location}</strong>, this development offers excellent access to local amenities,
-                green space, and transit. The area continues to see strong demand from both end-users and investors,
-                supported by population growth and infrastructure investment.
-              </p>
-            </div>
-
-            <div className="pd-features">
-              <h2>Key Features</h2>
-              <ul className="pd-features-list">
-                {["Premium new construction finishes", "Builder warranty included", "Strategic location with growth potential", "Expert advisory support throughout the process", "Early access pricing for registered clients", "Flexible deposit structures available"].map((f) => (
-                   <li key={f}><span className="pd-check">✓</span> {f}</li>
-                ))}
+              <h2>Specifications & Details</h2>
+              <ul className="pd-features-list" style={{ marginTop: "20px" }}>
+                {p.location && <li><span className="pd-check" style={{ color: "var(--gold)" }}>✓</span> Location: <strong>{p.location}</strong></li>}
+                {p.builder && <li><span className="pd-check" style={{ color: "var(--gold)" }}>✓</span> Builder: <strong>{p.builder}</strong></li>}
+                {p.beds && <li><span className="pd-check" style={{ color: "var(--gold)" }}>✓</span> Bedrooms: <strong>{p.beds} Beds</strong></li>}
+                {p.baths && <li><span className="pd-check" style={{ color: "var(--gold)" }}>✓</span> Bathrooms: <strong>{p.baths} Baths</strong></li>}
+                {p.status && <li><span className="pd-check" style={{ color: "var(--gold)" }}>✓</span> Status: <strong>{p.status}</strong></li>}
               </ul>
             </div>
 

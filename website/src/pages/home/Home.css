@@ -87,40 +87,33 @@
   align-items: center;
 }
 .about-intro-images {
-  position: relative;
-  height: 520px;
+  display: flex;
+  gap: 24px;
+  align-items: center; /* Vertically center images of different aspect ratios */
+  height: auto;
 }
+
 .about-intro-images .img-main {
-  width: 80%;
-  height: 440px;
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  border-radius: 4px;
-  box-shadow: 0 40px 80px rgba(13, 27, 42, 0.15);
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 58%; /* Showroom landscape gets more width */
+  height: auto; /* Natural height to prevent cropping */
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
 }
+
 .about-intro-images .img-accent {
-  width: 55%;
-  height: 280px;
-  object-fit: cover;
-  position: absolute;
-  bottom: 0px;
-  right: 0px;
-  border: 10px solid white;
-  box-shadow: 0 25px 50px rgba(0,0,0,0.18);
-  border-radius: 4px;
-  z-index: 2;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+  width: 38%; /* Portrait gets slightly less width to balance weight */
+  height: auto; /* Natural height to prevent cropping */
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
 }
 
 .about-intro-images img:hover {
-  transform: translateY(-8px) scale(1.01);
-}
-
-.about-intro-images .img-accent:hover {
-  border-color: var(--gold-light);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
 }
 .about-intro-text p { color: var(--slate); font-size: 15px; line-height: 1.8; }
 
@@ -155,7 +148,7 @@
   overflow: hidden;
   cursor: pointer;
 }
-.location-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+.location-card img { width: 100%; height: 100%; object-fit: cover; object-position: center center; transition: transform 0.6s ease; }
 .location-card:hover img { transform: scale(1.08); }
 .location-overlay {
   position: absolute;
@@ -205,7 +198,7 @@
 }
 .listing-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.1); }
 .listing-img-wrap { position: relative; height: 220px; overflow: hidden; }
-.listing-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+.listing-img-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center center; transition: transform 0.5s; }
 .listing-card:hover .listing-img-wrap img { transform: scale(1.06); }
 .listing-badge { position: absolute; top: 16px; left: 16px; background: var(--gold); color: white; padding: 4px 12px; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
 .listing-body { padding: 20px 24px 24px; }
@@ -221,10 +214,150 @@
   gap: 28px;
 }
 
-@media (max-width: 900px) {
-  .about-intro-grid, .services-grid, .location-grid, .spotlight-grid, .listings-grid, .testimonials-grid {
-    grid-template-columns: 1fr;
+/* ===========================
+   TABLET  ( ≤ 1024px )
+   =========================== */
+@media (max-width: 1024px) {
+  .about-intro-grid {
+    gap: 48px;
   }
-  .about-intro-images { height: 320px; }
+  .about-intro-images {
+    height: auto;
+    gap: 20px;
+  }
+  .about-intro-images .img-main {
+    width: 58%;
+    height: auto;
+  }
+  .about-intro-images .img-accent {
+    width: 38%;
+    height: auto;
+  }
+}
+
+/* ===========================
+   MOBILE  ( ≤ 900px )
+   =========================== */
+@media (max-width: 900px) {
+  /* Stack all main section grids */
+  .about-intro-grid,
+  .services-grid,
+  .location-grid,
+  .spotlight-grid,
+  .listings-grid,
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  /* On mobile switch from absolute-overlap collage to a clean
+     side-by-side flex row so faces are NEVER hidden or cropped. */
+  .about-intro-images {
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .about-intro-images .img-main {
+    width: 58%;
+    height: auto;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    border-radius: 6px;
+    transition: none;
+  }
+
+  .about-intro-images .img-accent {
+    width: 38%;
+    height: auto;
+    border: none;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    border-radius: 6px;
+    transition: none;
+  }
+
+  .about-intro-images img:hover {
+    transform: none;
+  }
+
   .blog-grid { grid-template-columns: 1fr; }
 }
+
+/* ===========================
+   SMALL MOBILE  ( ≤ 480px )
+   =========================== */
+@media (max-width: 480px) {
+  /* Stack vertically; portrait (img-accent) moves to top via order */
+  .about-intro-images {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .about-intro-images .img-main,
+  .about-intro-images .img-accent {
+    width: 100%;
+    height: auto;
+  }
+
+  .about-intro-images .img-accent {
+    order: -1;   /* portrait on top */
+  }
+}
+
+/* DISCLAIMER ACCORDION */
+.home-disclaimer-section {
+  padding: 40px 0 60px 0;
+}
+.disclaimer-box {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+}
+.disclaimer-header {
+  padding: 20px 24px;
+  background: white;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.2s ease;
+  user-select: none;
+}
+.disclaimer-header:hover {
+  background: var(--cream);
+}
+.disclaimer-header strong {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--navy);
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.disclaimer-header .icon {
+  color: var(--gold);
+  font-size: 18px;
+  font-weight: bold;
+}
+.disclaimer-content {
+  padding: 24px;
+  border-top: 1px solid var(--border);
+  background: var(--warm-white);
+  animation: disclaimerFadeIn 0.3s ease both;
+}
+.disclaimer-content p {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--slate);
+  margin: 0;
+}
+@keyframes disclaimerFadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+

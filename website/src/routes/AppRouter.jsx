@@ -6,6 +6,8 @@ import Property from "../pages/properties/Property";
 import Services from "../pages/services/Services";
 import Contact from "../pages/contact/Contact";
 import PropertyDetail from "../pages/property-detail/PropertyDetail";
+import PrivacyPolicy from "../pages/privacy-policy/PrivacyPolicy";
+import TermsConditions from "../pages/terms-conditions/TermsConditions";
 import ScrollToTop from "../components/common/ScrollToTop";
 
 export default function AppRouter() {
@@ -21,6 +23,8 @@ export default function AppRouter() {
           <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/property-detail" element={<PropertyDetail />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-conditions" element={<TermsConditions />} />
         </Route>
       </Routes>
     </>

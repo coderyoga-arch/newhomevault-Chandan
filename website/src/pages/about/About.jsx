@@ -4,7 +4,7 @@ import LeadForm from "../../components/common/LeadForm";
 import "./About.css";
 import meganMain from "../../assets/images/megan_main.png";
 import meganBW from "../../assets/images/megan_bw.png";
-import meganShowroom from "../../assets/images/megan_showroom_clean.png";
+import meganShowroom from "../../assets/images/megan_showroom.png";
 
 export default function About() {
   const navigate = useNavigate();
@@ -47,7 +47,7 @@ export default function About() {
             <button className="btn-primary" onClick={() => navigate("/contact#inquiry")}>Book a Private Consultation</button>
           </div>
           <div>
-            <img src={meganBW} alt="Megan Professional" style={{ width: '100%', height: 440, objectFit: 'cover', borderRadius: '8px', boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }} />
+            <img src={meganBW} alt="Megan Professional" style={{ width: '100%', height: 440, objectFit: 'cover', objectPosition: 'center center', borderRadius: '8px', boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }} />
           </div>
         </div>
       </section>

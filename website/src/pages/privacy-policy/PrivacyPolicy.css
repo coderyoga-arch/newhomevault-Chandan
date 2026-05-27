@@ -1,0 +1,121 @@
+.legal-page {
+  background: var(--warm-white);
+}
+
+.legal-content-section {
+  padding: 80px 0;
+}
+
+.legal-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.legal-card {
+  background: white;
+  padding: 60px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+.legal-dates {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 24px;
+  margin-bottom: 30px;
+}
+
+.legal-dates p {
+  font-size: 14px;
+  color: var(--slate);
+  margin: 0;
+}
+
+.company-info-block {
+  margin-bottom: 30px;
+}
+
+.company-info-block h3 {
+  font-family: var(--font-display);
+  color: var(--navy);
+  font-size: 24px;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.company-info-block p {
+  color: var(--slate);
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0 0 10px 0;
+}
+
+.governance-text {
+  font-style: italic;
+  color: var(--gold) !important;
+  margin-top: 16px !important;
+}
+
+.legal-divider {
+  border: 0;
+  height: 1px;
+  background: var(--border);
+  margin: 40px 0;
+}
+
+.legal-body h3 {
+  font-family: var(--font-display);
+  color: var(--navy);
+  font-size: 22px;
+  margin: 40px 0 16px 0;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(184, 149, 42, 0.15);
+  padding-bottom: 8px;
+}
+
+.legal-body h3:first-of-type {
+  margin-top: 0;
+}
+
+.legal-body h4 {
+  font-family: var(--font-display);
+  color: var(--navy);
+  font-size: 18px;
+  margin: 24px 0 12px 0;
+  font-weight: 600;
+}
+
+.legal-body p {
+  color: var(--slate);
+  font-size: 15px;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.legal-body ul {
+  padding-left: 24px;
+  margin-bottom: 24px;
+}
+
+.legal-body ul li {
+  color: var(--slate);
+  font-size: 15px;
+  line-height: 1.8;
+  margin-bottom: 8px;
+  list-style-type: square;
+}
+
+@media (max-width: 768px) {
+  .legal-card {
+    padding: 30px;
+  }
+  .legal-dates {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .legal-content-section {
+    padding: 40px 0;
+  }
+}

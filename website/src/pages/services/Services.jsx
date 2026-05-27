@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import LeadForm from "../../components/common/LeadForm";
 import "./Services.css";
-import meganShowroom from "../../assets/images/megan_showroom_clean.png";
+import meganShowroom from "../../assets/images/megan_showroom.png";
 import meganBW from "../../assets/images/megan_bw.png";
 
 export default function Services() {
