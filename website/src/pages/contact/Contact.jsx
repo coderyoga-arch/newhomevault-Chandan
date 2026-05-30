@@ -24,7 +24,9 @@ export default function Contact() {
             <h2 className="section-title">Let's Discuss Your<br />Next Home</h2>
             
             <div className="owner-contact-preview" style={{ marginBottom: 32, display: 'flex', gap: 24, alignItems: 'center' }}>
-              <img src={meganPortrait} alt="Megan" style={{ width: 120, height: 120, borderRadius: '50%', objectFit: 'cover', border: '3px solid var(--gold)' }} />
+              <div className="owner-avatar">
+                <img src={meganPortrait} alt="Megan" />
+              </div>
               <div>
                 <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 24, marginBottom: 4 }}>Megan</h3>
                 <p style={{ color: 'var(--gold)', fontWeight: 600, fontSize: 13, textTransform: 'uppercase', letterSpacing: 1 }}>Lead Advisor & Designer</p>

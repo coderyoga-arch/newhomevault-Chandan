@@ -10,7 +10,7 @@ export default function PropertyDetail() {
   const location = useLocation();
   const navigate = useNavigate();
   const [properties, setProperties] = useState([]);
-  
+
   useEffect(() => {
     async function loadProperties() {
       try {

@@ -11,7 +11,7 @@ export default function Footer() {
           <p>A boutique advisory for new homes & design. Serving Canada and key global markets.</p>
           <div className="footer-contact-list">
             <span>📞 (647) 693-1222</span>
-            <span>✉ info@newhomevault.com</span>
+            <span>✉ newhomevaultofficial@gmail.com</span>
             <span>📍 5010 Steeles Ave West, Suite 11A, Toronto M9V 5C6</span>
             <span>🕐 Mon–Sat, 9:00 AM – 9:00 PM</span>
           </div>
