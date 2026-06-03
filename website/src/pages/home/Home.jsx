@@ -137,7 +137,7 @@ export default function Home() {
                       <span>🛏 {p.beds} Beds</span>
                       <span>🚿 {p.baths} Baths</span>
                     </div>
-                    {p.priceFrom && (
+                    {p.priceFrom && !isNaN(p.priceFrom) && (
                       <p className="listing-price">From ${p.priceFrom.toLocaleString()}</p>
                     )}
                     <h3 className="listing-title">{p.name}</h3>

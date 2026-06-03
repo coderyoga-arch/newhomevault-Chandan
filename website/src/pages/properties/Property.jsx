@@ -73,7 +73,7 @@ export default function Property() {
                     <div className="property-body">
                       <h3 className="mgmt-prop-name" style={{ fontSize: 20, color: "var(--navy)", fontWeight: 600 }}>{p.name}</h3>
                       <p className="property-loc">📍 {p.location}</p>
-                      {p.priceFrom && (
+                      {p.priceFrom && !isNaN(p.priceFrom) && (
                         <p className="property-price">From ${p.priceFrom.toLocaleString()}</p>
                       )}
                       <button className="property-btn">View Details →</button>

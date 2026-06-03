@@ -62,10 +62,16 @@ export default function PropertyDetail() {
           {/* MAIN */}
           <div className="pd-main">
             <div className="pd-specs-bar">
-              {p.priceFrom && (
+              {p.priceFrom && !isNaN(p.priceFrom) && (
                 <div className="pd-spec">
-                  <span className="pd-spec-label">Price Range</span>
-                  <span className="pd-spec-val">${p.priceFrom.toLocaleString()} – ${p.priceTo.toLocaleString()}</span>
+                  <span className="pd-spec-label">
+                    {p.priceTo && !isNaN(p.priceTo) ? "Price Range" : "Price"}
+                  </span>
+                  <span className="pd-spec-val">
+                    {p.priceTo && !isNaN(p.priceTo)
+                      ? `$${p.priceFrom.toLocaleString()} – $${p.priceTo.toLocaleString()}`
+                      : `From $${p.priceFrom.toLocaleString()}`}
+                  </span>
                 </div>
               )}
               {p.beds && (
@@ -154,7 +160,7 @@ export default function PropertyDetail() {
                 </div>
                 <div className="listing-body">
                   <p className="listing-loc">📍 {rp.location}</p>
-                  {rp.priceFrom && <p className="listing-price">From ${rp.priceFrom.toLocaleString()}</p>}
+                  {rp.priceFrom && !isNaN(rp.priceFrom) && <p className="listing-price">From ${rp.priceFrom.toLocaleString()}</p>}
                   <h3 className="listing-title">{rp.name}</h3>
                 </div>
               </div>
