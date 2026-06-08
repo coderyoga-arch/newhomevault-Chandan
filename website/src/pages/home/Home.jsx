@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { properties as mockProperties, testimonials, blogs } from "../../utils/mockData";
+import { slugify } from "../../utils/slugify";
 import { propertyService } from "../../services/supabaseService";
 import "./Home.css";
 import meganShowroom from "../../assets/images/megan_showroom.png";
@@ -102,7 +103,7 @@ export default function Home() {
             </div>
             <div className="location-grid">
               {properties.slice(0, 3).map((p) => (
-                <div key={p.id} className="location-card" onClick={() => navigate("/property-detail", { state: p })}>
+                <div key={p.id} className="location-card" onClick={() => navigate("/property-detail/" + slugify(p.name), { state: p })}>
                   <img src={p.img || "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&q=80"} alt={p.name} />
                   <div className="location-overlay">
                     <h3>{p.name}</h3>
@@ -126,7 +127,7 @@ export default function Home() {
           {featured.length > 0 ? (
             <div className="listings-grid">
               {featured.map((p) => (
-                <div key={p.id} className="listing-card" onClick={() => navigate("/property-detail", { state: p })}>
+                <div key={p.id} className="listing-card" onClick={() => navigate("/property-detail/" + slugify(p.name), { state: p })}>
                   <div className="listing-img-wrap">
                     <img src={p.img || "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&q=80"} alt={p.name} />
                     <span className="listing-badge">{p.status}</span>

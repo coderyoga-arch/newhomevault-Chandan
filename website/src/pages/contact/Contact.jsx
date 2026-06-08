@@ -54,7 +54,7 @@ export default function Contact() {
                 <span className="method-icon">✉</span>
                 <div>
                   <strong>Email</strong>
-                  <p>info@newhomevault.com</p>
+                  <p>newhomevaultofficial@gmail.com</p>
                 </div>
               </div>
             </div>

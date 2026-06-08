@@ -234,6 +234,7 @@ export default function PropertyForm() {
                   placeholder="3"
                   required
                   min="0"
+                  step="0.5"
                 />
               </div>
 
@@ -247,6 +248,7 @@ export default function PropertyForm() {
                   placeholder="2"
                   required
                   min="0"
+                  step="0.5"
                 />
               </div>
             </div>

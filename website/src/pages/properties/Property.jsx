@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { propertyService } from "../../services/supabaseService";
 import { properties as mockProperties } from "../../utils/mockData";
+import { slugify } from "../../utils/slugify";
 import meganMain from "../../assets/images/megan_main.png";
 import "./Property.css";
 
@@ -62,7 +63,7 @@ export default function Property() {
             <div className="property-grid">
               {properties.length > 0 ? (
                 properties.map((p) => (
-                  <div key={p.id} className="property-card" onClick={() => navigate("/property-detail", { state: p })}>
+                  <div key={p.id} className="property-card" onClick={() => navigate("/property-detail/" + slugify(p.name), { state: p })}>
                     <div className="property-img-wrap">
                       <img src={p.img || "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&q=80"} alt={p.name} />
                       <span className="property-badge">{p.status}</span>

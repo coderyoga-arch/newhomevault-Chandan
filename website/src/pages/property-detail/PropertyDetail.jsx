@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { properties as mockProperties } from "../../utils/mockData";
+import { slugify } from "../../utils/slugify";
 import { propertyService } from "../../services/supabaseService";
 import LeadForm from "../../components/common/LeadForm";
 import meganMain from "../../assets/images/megan_main.png";
@@ -28,7 +29,20 @@ export default function PropertyDetail() {
     loadProperties();
   }, []);
 
-  const p = location.state || properties[0] || mockProperties[0];
+  const { name: urlSlug } = useParams();
+
+  // Resolve current property by URL slug, fallback to location.state or default property
+  let p = null;
+  if (urlSlug && properties.length > 0) {
+    p = properties.find((x) => slugify(x.name) === urlSlug);
+  }
+  if (!p && urlSlug) {
+    p = mockProperties.find((x) => slugify(x.name) === urlSlug);
+  }
+  if (!p) {
+    p = location.state || properties[0] || mockProperties[0];
+  }
+
   const related = properties.filter((x) => x.id !== p.id).slice(0, 3);
 
   return (
@@ -153,7 +167,7 @@ export default function PropertyDetail() {
           </div>
           <div className="pd-related-grid">
             {related.map((rp) => (
-              <div key={rp.id} className="listing-card" onClick={() => { navigate("/property-detail", { state: rp }); }} style={{ cursor: "pointer" }}>
+              <div key={rp.id} className="listing-card" onClick={() => { navigate("/property-detail/" + slugify(rp.name), { state: rp }); }} style={{ cursor: "pointer" }}>
                 <div className="listing-img-wrap">
                   <img src={rp.img} alt={rp.name} />
                   <span className="listing-badge">{rp.status}</span>

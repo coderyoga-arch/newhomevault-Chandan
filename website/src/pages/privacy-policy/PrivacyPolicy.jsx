@@ -26,7 +26,7 @@ export default function PrivacyPolicy() {
             <div className="company-info-block">
               <h3>Company Information</h3>
               <p>5010 Steeles Ave West, Suite 11A, Toronto, M9V 5C6, Canada</p>
-              <p><strong>Email:</strong> info@newhomevault.com</p>
+              <p><strong>Email:</strong>newhomevaultofficial@gmail.com</p>
               <p>
                 <strong>Office Hours:</strong><br />
                 Monday – Saturday<br />
@@ -146,7 +146,7 @@ export default function PrivacyPolicy() {
                 <li>Withdraw consent</li>
                 <li>Object to processing</li>
               </ul>
-              <p>Contact: info@newhomevault.com</p>
+              <p>Contact: newhomevaultofficial@gmail.com</p>
 
               <h3>10. Email Communications</h3>
               <p>You may opt out of marketing emails at any time using unsubscribe links.</p>
@@ -177,7 +177,7 @@ export default function PrivacyPolicy() {
                 Mississauga, ON L4W 1R1<br />
                 Canada
               </p>
-              <p>Email: info@newhomevault.com</p>
+              <p>Email: newhomevaultofficial@gmail.com</p>
               <p>
                 Office Hours:<br />
                 Monday – Saturday<br />

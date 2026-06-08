@@ -27,7 +27,7 @@ export default function TermsConditions() {
               <h3>Website Terms of Use</h3>
               <p>newhomevault.com (“Website”) is operated by HomeLife/Miracle Realty Ltd., Brokerage, located at:</p>
               <p>5010 Steeles Ave West, Suite 11A, Toronto, M9V 5C6, Canada</p>
-              <p><strong>Email:</strong> info@newhomevault.com</p>
+              <p><strong>Email:</strong> newhomevaultofficial@gmail.com</p>
               <p className="governance-text">
                 By accessing or using this Website, you agree to be bound by these Terms and Conditions (“Terms”).
                 If you do not agree, you must discontinue use of this Website immediately.
@@ -153,7 +153,7 @@ export default function TermsConditions() {
                 Mississauga, ON L4W 1R1<br />
                 Canada
               </p>
-              <p>Email: info@newhomevault.com</p>
+              <p>Email: newhomevaultofficial@gmail.com</p>
               <p>
                 Office Hours:<br />
                 Monday – Saturday<br />

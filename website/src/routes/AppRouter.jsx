@@ -23,6 +23,7 @@ export default function AppRouter() {
           <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/property-detail" element={<PropertyDetail />} />
+          <Route path="/property-detail/:name" element={<PropertyDetail />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-conditions" element={<TermsConditions />} />
         </Route>
